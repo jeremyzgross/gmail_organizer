@@ -1,7 +1,7 @@
-// src/2_Controllers/controller.deleteUnread.ts
 import { Request, Response, NextFunction } from 'express';
 import { google } from 'googleapis';
 import { oAuth2Client } from '../0_Config/config';
+
 export const delteUnread = async (
   req: Request,
   res: Response,

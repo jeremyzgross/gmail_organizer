@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gmail Organizer</title>
+</head>
+<body>
+  <h1>Gmail Organizer</h1>
+  <button id="deleteUnread">Delete Unread Emails</button>
+
+  <script>
+    document.getElementById('deleteUnread').addEventListener('click', async () => {
+      try {
+        const response = await fetch('http://localhost:3001/delete/unread', {
+          method: 'POST',
+          credentials: 'include', // Include cookies in the request
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        const result = await response.text();
+        alert(result);
+      } catch (error) {
+        console.error('Error:', error);
+        alert('Error deleting unread emails.');
+      }
+    });
+  </script>
+</body>
+</html>

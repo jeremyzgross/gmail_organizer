@@ -1,14 +1,20 @@
-import { Request, Response, NextFunction } from 'express';
-import { google } from 'googleapis';
-import { oAuth2Client } from '../0_Config/config';
-
+import { Request, Response, NextFunction } from 'express'
+import { google } from 'googleapis'
+import { oAuth2Client } from '../0_Config/config'
 export const deleteUnread = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    oAuth2Client.setCredentials(req.cookies.auth) // Ensure cookies are set
+    console.log('Request Method:', req.method) // Log the request method
+
+    const token = req.cookies.auth
+    if (!token) {
+      return res.status(401).send('Authentication required.')
+    }
+    oAuth2Client.setCredentials(token)
+
     const gmail = google.gmail({ version: 'v1', auth: oAuth2Client })
     const listResponse = await gmail.users.messages.list({
       userId: 'me',

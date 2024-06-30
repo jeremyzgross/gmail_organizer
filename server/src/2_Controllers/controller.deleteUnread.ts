@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import { google } from 'googleapis';
 import { oAuth2Client } from '../0_Config/config';
 
-export const delteUnread = async (
+export const deleteUnread = async (
   req: Request,
   res: Response,
   next: NextFunction
